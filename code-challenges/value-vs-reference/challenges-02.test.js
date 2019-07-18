@@ -147,6 +147,7 @@ describe('Testing challenge 5', () => {
     const b = [5, 6, 7, 8];
     append(a, b);
 
+    
     expect(a).toStrictEqual([1, 2, 3, 4, 5, 6, 7, 8]);
   });
 });
