@@ -79,16 +79,14 @@ const gruffaloCrumble = {
 
 
 const listFoods = (recipe) => {
-  let result = [];
-  // Solution code here...
-  let Ingredients = recipe.slice(1);
-  Ingredients.forEach(element => {
-    element.slice()
-
-  });
-
-  return result;
-};
+    let result = [];
+    let regex = /[a-z]\s/;
+    recipe.ingredients.forEach(item => {
+      let foo = item.match(regex).index + 2;
+      result.push(item.slice(foo));
+    });
+    return result;
+   };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -232,7 +230,7 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return a list of foods', () => {
     expect(listFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
     expect(listFoods(gruffaloCrumble).length).toStrictEqual(11);
@@ -252,7 +250,7 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-describe('Testing challenge 6', () => {
+xdescribe('Testing challenge 6', () => {
   test('It should remove the even numbers from the array', () => {
     let list = [1, 2, 3, 4, 5, 6];
     removeEvenValues(list);
