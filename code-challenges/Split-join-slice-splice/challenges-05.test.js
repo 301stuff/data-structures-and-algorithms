@@ -79,14 +79,16 @@ const gruffaloCrumble = {
 
 
 const listFoods = (recipe) => {
-    let result = [];
-    let regex = /[a-z]\s/;
-    recipe.ingredients.forEach(item => {
-      let foo = item.match(regex).index + 2;
-      result.push(item.slice(foo));
-    });
-    return result;
-   };
+  let result = [];
+  let regex = /[a-z]\s/;
+  recipe.ingredients.forEach(item => {
+    let foo = item.match(regex).index + 2;
+    result.push(item.slice(foo));
+  });
+  return result;
+};
+
+//Got help from James Dunn involving the regex of this function
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -99,6 +101,13 @@ You may also use other string or array methods.
 const splitFoods = (recipe) => {
   let result = [];
   // Solution code here...
+  recipe.ingredients.forEach(item => {
+    let splitArray = item.split(' ');
+    let foodArray= splitArray.slice(2);
+result.push(foodArray.join(' '))
+  });
+
+
   return result;
 };
 
@@ -115,6 +124,13 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 const stepActions = (recipe) => {
   let result = [];
   // Solution code here...
+  recipe.steps.forEach(item => {
+    let splitResult = item.split();
+    splitResult.forEach(item =>{
+      result.push(splitResult.slice());
+
+    })
+  });
   return result;
 };
 
@@ -137,7 +153,7 @@ const removeEvenValues = (arr) => {
     if (item % 2 === 0) {
       arr.splice();
     }
-    
+
   });
   return arr;
 };
@@ -230,7 +246,7 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-describe('Testing challenge 3', () => {
+xdescribe('Testing challenge 3', () => {
   test('It should return a list of foods', () => {
     expect(listFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
     expect(listFoods(gruffaloCrumble).length).toStrictEqual(11);
@@ -243,7 +259,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return a list of recipe steps', () => {
     expect(stepActions(gruffaloCrumble)).toStrictEqual(['Pre-heat', 'De-prickle', 'Sprinkle', 'Mix', 'Grease', 'Combine', 'Fold', 'Spread', 'Bake']);
     expect(stepActions(gruffaloCrumble).length).toStrictEqual(9);
