@@ -104,7 +104,7 @@ const splitFoods = (recipe) => {
   recipe.ingredients.forEach(item => {
     let splitArray = item.split(' ');
     let foodArray= splitArray.slice(2);
-result.push(foodArray.join(' '))
+    result.push(foodArray.join(' '));
   });
 
 
@@ -125,11 +125,10 @@ const stepActions = (recipe) => {
   let result = [];
   // Solution code here...
   recipe.steps.forEach(item => {
-    let splitResult = item.split();
-    splitResult.forEach(item =>{
-      result.push(splitResult.slice());
+    let splitResult = item.split(' ');
+    let sliceResult = splitResult.slice(0,1);
+    result.push(sliceResult.join(' '));
 
-    })
   });
   return result;
 };
@@ -149,12 +148,11 @@ For example:
 
 const removeEvenValues = (arr) => {
   // Solution code here...
-  arr.forEach(item => {
-    if (item % 2 === 0) {
-      arr.splice();
+  for (let i = 0; i < arr.length; i++){
+    while (arr[i] % 2 === 0){
+      arr.splice(i, 1);
     }
-
-  });
+  }
   return arr;
 };
 
@@ -175,6 +173,13 @@ removeLastCharacters('Gregor', 9) returns ''
 
 const removeLastCharacters = (str, numberOfCharacters) => {
   // Solution code here...
+  if (numberOfCharacters > str.length){
+    return '';
+  } else if (numberOfCharacters < 0){
+    return str;
+  } else {
+    return str.slice(0, str.length-numberOfCharacters);
+  }
 };
 
 
@@ -228,7 +233,7 @@ Run your tests from the console: jest challenges-05.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return a list of shortening words', () => {
     expect(howMuchPencil('Welcome')).toStrictEqual(['Welcome', 'elcome', 'lcome', 'come', 'ome', 'me', 'e', '']);
     expect(howMuchPencil('Welcome').length).toStrictEqual(8);
@@ -237,7 +242,7 @@ xdescribe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array of individual letters', () => {
     expect(wordsToCharList('Gregor')).toStrictEqual(['G', 'r', 'e', 'g', 'o', 'r']);
     expect(wordsToCharList('Gregor').length).toStrictEqual(6);
@@ -246,14 +251,14 @@ xdescribe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return a list of foods', () => {
     expect(listFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
     expect(listFoods(gruffaloCrumble).length).toStrictEqual(11);
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return a list of foods', () => {
     expect(splitFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
   });
@@ -266,7 +271,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should remove the even numbers from the array', () => {
     let list = [1, 2, 3, 4, 5, 6];
     removeEvenValues(list);
@@ -279,7 +284,7 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should shorten the string based on the first argument', () => {
     expect(removeLastCharacters('Gregor', 2)).toStrictEqual('Greg');
     expect(removeLastCharacters('Gregor', 2).length).toStrictEqual(4);
