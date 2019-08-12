@@ -13,7 +13,7 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 
 const count = (target, input) => {
   // Solution code here...
- return [].concat(...input).reduce((acc, value)=>{
+  return [].concat(...input).reduce((acc, value)=>{
     if(target === value){
       acc ++;
     }
@@ -33,10 +33,10 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 
 const totalSum = (input) => {
   // Solution code here...
-return [].concat(...input).reduce((acc, value)=>{
-  acc += value;
-  return acc; 
-},0);
+  return [].concat(...input).reduce((acc, value)=>{
+    acc += value;
+    return acc;
+  },0);
 
 };
 
@@ -54,7 +54,7 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   // Solution code here...
-   let newArr = [];
+  let newArr = [];
 
   input.forEach(el => {
     newArr.push(el.filter(a => (typeof a === 'number' && a % 5 === 0))
@@ -131,7 +131,7 @@ let findMaleAndFemale = (data) => {
   // Solution code here...
 
 
-  return data.reduce((acc, value, index)=>{
+  return data.reduce((acc, value)=>{
     if(value.gender === 'female'|| value.gender ==='male'){
       acc.push(value.name);
     }
@@ -150,15 +150,15 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 let findShortest = (data) => {
   // Solution code here...
   let answer = '';
- data.filter(item=>{
-  let shortHeight = data.reduce((min, b)=>{
-   return Math.min(min, b.height);
-  }, data[0].height);
+  data.filter(item=>{
+    let shortHeight = data.reduce((min, b)=>{
+      return Math.min(min, b.height);
+    }, data[0].height);
 
-  if(item.height == shortHeight){
-    answer = item.name;
- }
-});
+    if(Number(item.height) === shortHeight){
+      answer = item.name;
+    }
+  });
 
   return answer;
 
