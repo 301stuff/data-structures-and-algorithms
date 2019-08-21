@@ -24,15 +24,18 @@ const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
   // Solution code here...
-  let answer =[];
-  stores.forEach(item=>{
-    item.forEach(item2=>{
-      answer.push(item2[i] += item[i])
-    })
+  let answer =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  stores.forEach((item, index)=>{
+    // console.log('this is first loop', item);
+    // console.log('index', item[0]);
+    for(var i =0; i < hoursOpen.length; i++){
+      answer[i] += item[i];
+    }
+
+
   })
-  console.log(answer);
 
-
+  return answer;
 };
 
 /* ------------------------------------------------------------------------------------------------
