@@ -15,7 +15,7 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
 const getCourseKeys = (obj) => {
   // Solution code here...
   return Object.keys(obj);
-  
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -73,9 +73,8 @@ let characters = [
 const getHouses = (arr) => {
   let houses = [];
   // Solution code here...
-  Object.values(arr).forEach(value => {
-    houses.push(value.house);
-  })
+  houses = arr.map(a => a.house);
+
   return houses;
 };
 
@@ -93,13 +92,15 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
-  Object.values(arr).forEach(value => {
-    if(value.children >0){
-      return true;
-    } else {
-      return false;
-    }
-  })
+  let index = arr.findIndex(x => x.name === character);
+  let charInfo = Object.values(arr[index]);
+
+  if(charInfo[2].length > 0){
+    return true;
+  }
+  else{
+    return false;
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -112,6 +113,13 @@ The input and output of this function are the same as the input and output from 
 
 const hasChildrenEntries = (arr, character) => {
   // Solution code here...
+  let index = arr.findIndex(x => x.name === character);
+  if(Object.entries(arr[index])[2][1].length > 0){
+    return true;
+  }
+  else {
+    return false;
+  }
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -122,6 +130,22 @@ Write a function named totalCharacters that takes in an array and returns the nu
 
 const totalCharacters = (arr) => {
   // Solution code here...
+  let characterCount = 0;
+  let name = arr.map(a => a.name);
+  let spouse = arr.map(a => a.spouse);
+  let children = arr.map(a => a.children);
+  name.forEach(element => {
+    characterCount++;
+  });
+  spouse.forEach(element => {
+    if(element != null){
+      characterCount++;
+    }
+  });
+  children.forEach(element => {
+    characterCount = characterCount + element.length;
+  });
+  return characterCount;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -175,13 +199,13 @@ Run your tests from the console: jest challenges-06.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
-xdescribe('Testing challenge 1', () => {
+describe('Testing challenge 1', () => {
   test('It should return the keys from an object', () => {
     expect(getCourseKeys(courseInfo)).toStrictEqual([ 'name', 'duration', 'topics', 'finalExam' ]);
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array of the names of the houses', () => {
     expect(getHouses(characters)).toStrictEqual([ 'Stark', 'Arryn', 'Lannister', 'Targaryen', 'Tyrell', 'Stark', 'Snow' ]);
     expect(getHouses(characters).length).toStrictEqual(7);
@@ -198,7 +222,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenEntries(characters, 'Eddard')).toBeTruthy();
   });
@@ -208,7 +232,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return the number of characters in the array', () => {
     expect(totalCharacters(characters)).toStrictEqual(27);
   });
